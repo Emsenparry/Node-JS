@@ -1,0 +1,27 @@
+{
+  "name": "node-js",
+  "version": "1.0.0",
+  "description": "First time doing a Node JS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emsenparry/Node-JS.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Emma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Emsenparry/Node-JS/issues"
+  },
+  "homepage": "https://github.com/Emsenparry/Node-JS#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
