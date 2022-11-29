@@ -1,8 +1,12 @@
 import express from 'express' //importede express
 import { router as SongRouter } from './routes/song.router.js' //Lavede en song.router.js fil og importede den fil til index
+import dotenv from 'dotenv';
+
+dotenv.config();
+const port = process.env.PORT || 3000 //Henter PORT fra .env filen. Hvis den ikke kan finde port 3000 i env filen så skal den være 3000.
 
 const app = express()
-const port = 3000
+
 
 app.use(express.urlencoded({ extended: true })) //Extended vores kald så vi kan se form data i en post. 
 
@@ -21,16 +25,4 @@ app.listen(port, () => { //Hvilken port skal den lytte til og derefter eksevere 
 
 // app.get('/about', (req, res) => {
 //     res.send('About us');
-// })
-
-// app.get('/location', (req, res) => {
-//     res.send('Find os');
-// })
-
-// app.get('/products', (req, res) => {
-//     res.send('Vores produkter');
-// })
-
-// app.get('/contact', (req, res) => {
-//     res.send('Kontakt os');
 // })

@@ -1,16 +1,20 @@
 import express from 'express' //Importere express
+import SongController from '../controllers/song.controller.js' 
+
 
 const router = express.Router() //Laver en const der kalder router metoden
+const controller = new SongController()
 
-//GET
+//GET LIST
 router.get('/song', (req, res) => { //Kalder metoden get med et endpoint, derefter kalder req and res objekterne
     console.log('Liste: Kalder /song med GET');
+    controller.list(res)
 })
 
 //GET DETAILS
 router.get('/song/:id([0-9]*)', (req, res) => { 
     console.log('Detaljer: Kalder /song med GET');
-    res.send(`Sang detaljer: ${req.params.id}`)
+    controller.details(req, res)
 })
 
 //POST
@@ -27,7 +31,7 @@ router.post('/song', (req, res) => {
 router.put('/song', (req, res) => { 
     console.log('Opdater: Kalder /song med PUT');
     const formData = `
-    Id: ${req.body.id}
+    ID: ${req.body.id}
     Title: ${req.body.title}
     Content: ${req.body.content}
     `
@@ -38,7 +42,7 @@ router.put('/song', (req, res) => {
 router.delete('/song/:id([0-9]*)', (req, res) => { 
     console.log('Slet: Kalder /song med DELETE');
     const formData = `
-    Id: ${req.body.id}
+    ID: ${req.body.id}
     Title: ${req.body.title}
     Content: ${req.body.content}
     `
