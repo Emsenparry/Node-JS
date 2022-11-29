@@ -1,4 +1,4 @@
-import express from 'express'
+import express from 'express' //Importere express
 
 const router = express.Router() //Laver en const der kalder router metoden
 
@@ -27,4 +27,5 @@ router.delete('/song/:id([0-9]*)', (req, res) => {
     console.log('Slet: Kalder /song med DELETE');
 })
 
-export { router }
+export { router } //Exportere router som et name export, betyder at der er {} udenom. Det er bare en funktion vi exportere.
+//Der findes default og name export. 
