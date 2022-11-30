@@ -1,17 +1,26 @@
-import express from 'express' //Importere express
+/**
+ * Imports express package
+ * Imports SongController from song.controller.js file
+ */
+import express from 'express'
 import SongController from '../controllers/song.controller.js' 
 
-
-const router = express.Router() //Laver en const der kalder router metoden
+/**
+ * express.Router() -> Creates a const which calls the router method
+ */
+const router = express.Router() 
 const controller = new SongController()
 
-//GET LIST
-router.get('/song', (req, res) => { //Kalder metoden get med et endpoint, derefter kalder req and res objekterne
+//GET - LIST
+/**
+ * Calls method GET with an endpoints which afterwards calls the req and res objects
+ */
+router.get('/song', (req, res) => {
     console.log('Liste: Kalder /song med GET');
     controller.list(res)
 })
 
-//GET DETAILS
+//GET - DETAILS
 router.get('/song/:id([0-9]*)', (req, res) => { 
     console.log('Detaljer: Kalder /song med GET');
     controller.details(req, res)
@@ -20,11 +29,7 @@ router.get('/song/:id([0-9]*)', (req, res) => {
 //POST
 router.post('/song', (req, res) => { 
     console.log('Opret: Kalder /song med POST');
-    const formData = `
-    Title: ${req.body.title}
-    Content: ${req.body.content}
-    `
-    res.send(`Opretter sang: ${formData}`)
+    controller.create(req, res)
 })
 
 //PUT
