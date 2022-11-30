@@ -34,6 +34,11 @@ class SongController {
         }
     }) 
     }
+    /**
+     * Creates a method with two arguments in, the req and res objects
+     * When called, the response will send "Sang oprettet" as a response to the request
+     * Afterwards it logs the body of the request
+     */
     create = (req, res) => {
         res.send('Sang oprettet')
         console.log(req.body);
