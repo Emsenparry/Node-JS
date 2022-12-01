@@ -13,7 +13,8 @@ const controller = new SongController()
 
 //GET - LIST
 /**
- * Calls method GET with an endpoints which afterwards calls the req and res objects
+ * Calls method GET with an endpoints which afterwards calls the (req and) res objects.
+ * List only have 1 argument which is res
  */
 router.get('/song', (req, res) => {
     console.log('Liste: Kalder /song med GET');
