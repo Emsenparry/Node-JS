@@ -18,7 +18,7 @@ const controller = new SongController()
  */
 router.get('/song', (req, res) => {
     console.log('Liste: Kalder /song med GET');
-    controller.list(res)
+    controller.list(req, res)
 })
 
 //GET - DETAILS

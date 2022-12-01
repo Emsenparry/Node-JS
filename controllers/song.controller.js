@@ -9,8 +9,27 @@ class SongController {
     }
     
     // MUST have res on before we'll get a response back
-    list = res => { 
-        const sql = "SELECT song.title, artist.name FROM song JOIN artist ON song.id = artist.id LIMIT 15"
+    list = (req, res) => { 
+        let { sortkey, sortdir, limit, attributes } = req.query
+        /**
+         * Checks if sortkey is true. 
+         * If it is true then it gotta pick itself
+         * If NOT true then it will pick the ID
+         */
+        sortkey = sortkey ? sortkey : 'id' 
+        sortdir = sortdir ? sortdir.toUpperCase() : 'ASC'
+        // Checks if what is parsed is a Int (number)
+        limit = limit ? `LIMIT ${parseInt(limit)}` : ''
+        attributes = attributes ? attributes : 's.id, s.title, a.name'
+        console.log(sortkey);
+        
+        // Declares SQL
+        const sql = `SELECT ${attributes}
+                        FROM song s
+                        JOIN artist a
+                        ON s.artist_id = a.id
+                        ORDER BY ${sortkey} ${sortdir} ${limit}`
+        console.log(sql);
         db.query(sql, (err, result) => {
         if(err) {
             console.error(err)
@@ -18,7 +37,7 @@ class SongController {
             res.json(result);
         }
     })
-    } 
+} 
     details = (req, res) => {
         // Declares id out from the url params. If it's not that then the ID is 0.
         const id = req.params.id || 0
