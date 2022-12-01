@@ -22,7 +22,7 @@ class SongController {
         limit = limit ? `LIMIT ${parseInt(limit)}` : ''
         attributes = attributes ? attributes : 's.id, s.title, a.name'
         console.log(sortkey);
-        
+
         // Declares SQL
         const sql = `SELECT ${attributes}
                         FROM song s
@@ -72,6 +72,25 @@ create = (req, res) => {
     res.json(result);
     }
 })
+}
+
+update = (req, res) => {
+    const id = req.body.id
+    const title = req.body.title
+    const content = req.body.content
+
+    const sql = `UPDATE song SET
+                    title = ?,
+                    content = ?
+                    WHERE id = ?`
+                    console.log(sql);
+    db.query(sql, [title, content, id], (err, result) => {
+        if(err) {
+            console.error(err) 
+        } else {
+            res.json(result)
+        }
+    })
 }
 }
 

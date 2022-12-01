@@ -36,12 +36,7 @@ router.post('/song', (req, res) => {
 //PUT
 router.put('/song', (req, res) => { 
     console.log('Opdater: Kalder /song med PUT');
-    const formData = `
-    ID: ${req.body.id}
-    Title: ${req.body.title}
-    Content: ${req.body.content}
-    `
-    res.send(`Opdater sang: ${formData}`)
+    controller.update(req, res)
 })
 
 //DELETE
