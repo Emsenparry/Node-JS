@@ -20,6 +20,7 @@ class SongController {
         sortdir = sortdir ? sortdir.toUpperCase() : 'ASC'
         // Checks if what is parsed is a Int (number)
         limit = limit ? `LIMIT ${parseInt(limit)}` : ''
+        // Choose which felter you want to be displayed
         attributes = attributes ? attributes : 's.id, s.title, a.name'
         console.log(sortkey);
 
