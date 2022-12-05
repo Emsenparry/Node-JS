@@ -42,12 +42,7 @@ router.put('/song', (req, res) => {
 //DELETE
 router.delete('/song/:id([0-9]*)', (req, res) => { 
     console.log('Slet: Kalder /song med DELETE');
-    const formData = `
-    ID: ${req.body.id}
-    Title: ${req.body.title}
-    Content: ${req.body.content}
-    `
-    res.send(`Sletter sang: ${formData}`)
+    controller.delete(req, res)
 })
 
 export { router } //Exportere router som et name export, betyder at der er {} udenom. Det er bare en funktion vi exportere.

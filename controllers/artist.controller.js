@@ -29,6 +29,36 @@ class ArtistController{
             }
         })
     }
+    details = (request, response) => {
+        const id = request.params.id || 0
+
+        const sql = `SELECT id, name
+                        FROM artist
+                        WHERE id = ?
+                        `
+        db.query(sql, [id], (err, result) => {
+            if(err) {
+                console.error(err)
+            } else {
+                response.json(result);
+            }
+        })
+    }
+    create = (request, response) => {
+        let { name } = request.body;
+    
+        const sql = `INSERT INTO 
+                        artist (name) 
+                        VALUES (?)`
+        db.query(sql, [name], (err, result) => {
+          if(err) {
+            console.error(err)
+          } else {
+            console.log('Artist oprettet')
+            response.json(result);
+          }
+      })
+    }
 }
 
 export default ArtistController
