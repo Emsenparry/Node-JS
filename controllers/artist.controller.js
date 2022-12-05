@@ -59,6 +59,33 @@ class ArtistController{
           }
       })
     }
+    update = (req, res) => {
+       let { name, id } = req.body;
+    
+        const sql = `UPDATE artist SET
+                        name = ?
+                        WHERE id = ?`
+        db.query(sql, [name, id], (err, result) => {
+            if(err) {
+                console.error(err) 
+            } else {
+                res.json(result)
+            }
+        })
+    }
+    delete = (req, res) => {
+        const id = req.params.id || 0
+    
+        const sql = `DELETE FROM artist
+                        WHERE id = ?`
+            db.query(sql, [id], (err, result) => {
+            if(err) {
+                console.error(err)
+            } else {
+                res.json(result);
+            }
+    })
+    }
 }
 
 export default ArtistController

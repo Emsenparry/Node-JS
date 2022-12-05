@@ -20,4 +20,15 @@ ArtistRouter.post('/artist', (request, response) => {
     controller.create(request, response)
 })
 
+ArtistRouter.put('/artist', (request, response) => {
+    console.log('Artist Route Opdater artist');
+    controller.update(request, response)
+})
+
+ArtistRouter.delete('/artist/:id([0-9]*)', (request, response) => {
+    console.log('Artist Route Slet artist');
+    controller.delete(request, response)
+})
+
+
 export default ArtistRouter
