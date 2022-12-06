@@ -4,6 +4,7 @@
  */
 import { sequelize } from "../config/sequelize.config.js"
 import { DataTypes, Model} from 'sequelize'
+import bcrypt from 'bcrypt'
 
 /**
  * Create a new class called UserModel which inherits (nedarvre) all properties
@@ -54,9 +55,20 @@ UserModel.init({
     sequelize, 
     modelName: 'user',
     freezeTableName: true,
-    underscored: true
-    // createdAt: false,
-    // updatedAt: false
+    underscored: true,
+    hooks: {
+        beforeCreate: async(user, options) => {
+            user.password = await createHash(user.password)
+        }
+    }
 })
+/**
+ * 
+ */
+const createHash = async string => {
+    const salt = await bcrypt.genSalt(10)
+    const hashed_string = await bcrypt.hash(string, salt)
+    return hashed_string
+}
 
 export default UserModel

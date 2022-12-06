@@ -73,8 +73,18 @@ class ArtistController{
             }
         })
     }
-    
-    	
+    delete = (request, response) => {
+        const id = request.params.id || 0
+        const sql = `DELETE FROM artist WHERE id = ?`
+        
+        db.query(sql, [id], (err, result) => {
+            if(err) {
+                console.error(err)
+            } else {
+                response.sendStatus(200);
+            }
+        })
+    } 	
 }
 
 export default ArtistController
