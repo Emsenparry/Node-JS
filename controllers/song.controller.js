@@ -1,4 +1,5 @@
 import db from '../config/mysql.config.js'
+import SongModel from '../models/song.model.js'
 
 /**
  * Constructor -> A method we call when the class is called
