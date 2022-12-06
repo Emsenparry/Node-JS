@@ -59,12 +59,13 @@ UserModel.init({
     hooks: {
         beforeCreate: async(user, options) => {
             user.password = await createHash(user.password)
-        }
+        },
+        beforeUpdate: async(user, options) => {
+            user.password = await createHash(user.password)
+        },
     }
 })
-/**
- * 
- */
+
 const createHash = async string => {
     const salt = await bcrypt.genSalt(10)
     const hashed_string = await bcrypt.hash(string, salt)

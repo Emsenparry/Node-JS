@@ -45,15 +45,21 @@ class UserController {
     }
 
     update = async (req, res) => {
-        const { firstname, lastname, email, id } = req.body;
+        const { id } = req.params ||0
+        const { firstname, lastname, email, password } = req.body;
         
-        if(firstname && lastname && email) {
-            await UserModel.update(req.body, { where: { id: id }});
-            return res.sendStatus(200);
+        if(id && firstname && lastname && email && password) {
+            const model = await UserModel.update(req.body, {
+                where: { id: id },
+                individualHooks: true
+            })
+            res.json({
+                msg: 'Record Update'
+            })
         } else {
-            return res.send(418)
+            res.sendStatus(418)
         }
-    }
+    } 
 
     delete = async (req, res) => {
         try {
