@@ -1,5 +1,8 @@
 import UserModel from '../models/users.model.js'
 
+/**
+ * It runs as async because sequelize is build on the promise technology. It's promise-based
+ */
 class UserController {
     list = async (req, res) => {
         let { sortkey, sortdir, limit, attributes } = req.query
@@ -10,6 +13,10 @@ class UserController {
         const attr = attributes ? attributes.split(',') : new Array('id', 'firstname', 'lastname', 'email')
         console.log(attr);
 
+        /**
+         * Creates a const called result
+         * Await UserModel.findAll instead of SELECT *
+         */
         const result = await UserModel.findAll({
             attributes: attr,
             orderby: [order],
@@ -24,7 +31,6 @@ class UserController {
             where: { id: id }
         })
         res.json(result)
-
     }
 }
 

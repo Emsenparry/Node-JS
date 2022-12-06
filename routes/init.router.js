@@ -1,3 +1,6 @@
+/**
+ * Syncronise our database with our models
+ */
 import express from 'express'
 import { sequelize } from '../config/sequelize.config.js'
 const InitRouter = express.Router()
