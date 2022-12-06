@@ -34,15 +34,37 @@ class UserController {
     }
 
     create = async (req, res) => {
-        const { firstname, lastname, email, passowrd } = req.body;
+        const { firstname, lastname, email, password } = req.body;
 
-        if(firstname && lastname && email && passowrd) {
+        if(firstname && lastname && email && password) {
             const model = await UserModel.create(req.body)
             res.json({ newId: model.id }) //Returns a json object with the id
         } else {
             res.sendStatus(418)
         }
     }
+
+    update = async (req, res) => {
+        const { firstname, lastname, email, id } = req.body;
+        
+        if(firstname && lastname && email) {
+            await UserModel.update(req.body, { where: { id: id }});
+            return res.sendStatus(200);
+        } else {
+            return res.send(418)
+        }
+    }
+
+    delete = async (req, res) => {
+        try {
+            await UserModel.destroy({ where: { id: req.params.id }});
+            res.sendStatus(200)
+        }
+        catch(err) {
+            res.send(err)
+        }
+    }	
+
 }
 
 export default UserController
