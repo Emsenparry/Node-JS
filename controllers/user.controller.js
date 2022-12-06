@@ -32,6 +32,17 @@ class UserController {
         })
         res.json(result)
     }
+
+    create = async (req, res) => {
+        const { firstname, lastname, email, passowrd } = req.body;
+
+        if(firstname && lastname && email && passowrd) {
+            const model = await UserModel.create(req.body)
+            res.json({ newId: model.id }) //Returns a json object with the id
+        } else {
+            res.sendStatus(418)
+        }
+    }
 }
 
 export default UserController
