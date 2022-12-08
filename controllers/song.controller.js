@@ -44,7 +44,11 @@ class SongController {
         // Declares id out from the url params. If it's not that then the ID is 0.
         const id = req.params.id || 0
 
-        const sql = "SELECT s.title, s.content, s.id, a.name FROM song s JOIN artist a ON s.artist_id = a.id WHERE s.id = ?"
+        const sql = `SELECT s.title, s.content, s.id, a.name 
+                        FROM song s 
+                        JOIN artist a 
+                        ON s.artist_id = a.id 
+                        WHERE s.id = ?`
         // Executes the SQL, id and the conditional statements
         db.query(sql, [id], (err, result) => {
         if(err) {
