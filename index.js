@@ -1,9 +1,12 @@
 import express from 'express' //importede express
 import { router as SongRouter } from './routes/song.router.js' //Lavede en song.router.js fil og importede den fil til index
 import dotenv from 'dotenv';
+
+// ROUTES
 import ArtistRouter from './routes/artist.router.js'
 import InitRouter from './routes/init.router.js'
 import UserRouter from './routes/user.router.js'
+import OrgRouter from './routes/org.router.js'
 
 
 dotenv.config();
@@ -23,15 +26,10 @@ app.use(UserRouter)
 
 app.use(SongRouter)
 app.use(ArtistRouter)
+app.use(OrgRouter)
 
 
 app.listen(port, () => { //Hvilken port skal den lytte til og derefter eksevere den en annoynym arrow funktion
     console.log(`Webserver running on http://localhost:${port}`);
 })
 
-
-
-
-// app.get('/about', (req, res) => {
-//     res.send('About us');
-// })

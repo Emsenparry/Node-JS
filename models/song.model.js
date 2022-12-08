@@ -24,7 +24,6 @@ SongModel.init({
         allowNull: false
     }
 }, {
-
     sequelize,
     modelName: 'artist',
     freezeTableName: true,

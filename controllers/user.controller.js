@@ -1,9 +1,22 @@
 import UserModel from '../models/users.model.js'
+import OrgModel from '../models/org.model.js';
+
+/**
+ * Join
+ */
+OrgModel.hasMany(UserModel)
+UserModel.belongsTo(OrgModel)
+
 
 /**
  * It runs as async because sequelize is build on the promise technology. It's promise-based
  */
 class UserController {
+    constructor() { 
+        console.log('User Controller has been fired');
+    }
+
+
     list = async (req, res) => {
         let { sortkey, sortdir, limit, attributes } = req.query
 
@@ -20,7 +33,11 @@ class UserController {
         const result = await UserModel.findAll({
             attributes: attr,
             orderby: [order],
-            limit: limit
+            limit: limit,
+            include: {
+                model: OrgModel,
+                attributes: ['id', 'title']
+            }
         })
         res.json(result)
     }
@@ -34,9 +51,9 @@ class UserController {
     }
 
     create = async (req, res) => {
-        const { firstname, lastname, email, password } = req.body;
+        const { firstname, lastname, email, password, org_id } = req.body;
 
-        if(firstname && lastname && email && password) {
+        if(firstname && lastname && email && password && org_id) {
             const model = await UserModel.create(req.body)
             res.json({ newId: model.id }) //Returns a json object with the id
         } else {
@@ -46,9 +63,9 @@ class UserController {
 
     update = async (req, res) => {
         const { id } = req.params ||0
-        const { firstname, lastname, email, password } = req.body;
+        const { firstname, lastname, email, password, org_id } = req.body;
         
-        if(id && firstname && lastname && email && password) {
+        if(id && firstname && lastname && email && password && org_id) {
             const model = await UserModel.update(req.body, {
                 where: { id: id },
                 individualHooks: true

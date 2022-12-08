@@ -40,6 +40,10 @@ UserModel.init({
         type: DataTypes.STRING,
         allowNull: false
     },
+    org_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     is_active: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
@@ -56,6 +60,10 @@ UserModel.init({
     modelName: 'user',
     freezeTableName: true,
     underscored: true,
+    /**
+     * Hooks er en indbygget metode?
+     * Vi laver et hook imellem sequelize og databasen fordi den skal kryptere password. 
+     */
     hooks: {
         beforeCreate: async(user, options) => {
             user.password = await createHash(user.password)
