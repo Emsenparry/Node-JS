@@ -61,8 +61,8 @@ UserModel.init({
     freezeTableName: true,
     underscored: true,
     /**
-     * Hooks er en indbygget metode?
-     * Vi laver et hook imellem sequelize og databasen fordi den skal kryptere password. 
+     * Hooks is a build-in method
+     * We create a hook between sequelize and the database because it needs to encrypt password
      */
     hooks: {
         beforeCreate: async(user, options) => {

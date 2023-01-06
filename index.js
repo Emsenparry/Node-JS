@@ -7,6 +7,7 @@ import ArtistRouter from './routes/artist.router.js'
 import InitRouter from './routes/init.router.js'
 import UserRouter from './routes/user.router.js'
 import OrgRouter from './routes/org.router.js'
+import { router as AuthRouter } from './routes/authenticate.router.js'
 
 
 dotenv.config();
@@ -22,11 +23,13 @@ app.get('/', (req, res) => { //App er vores objekt, get er en metode
 })
 
 app.use(InitRouter)
+app.use(AuthRouter)
 app.use(UserRouter)
+app.use(OrgRouter)
 
 app.use(SongRouter)
 app.use(ArtistRouter)
-app.use(OrgRouter)
+
 
 
 app.listen(port, () => { //Hvilken port skal den lytte til og derefter eksevere den en annoynym arrow funktion
